@@ -62,30 +62,71 @@ if(ans!=null)
 
     if(ans.equals(correctAns[numb-1]))
     {
-        out.print("Correct!!");
         score++;
         session.setAttribute("score",score);
         
     }
 
-    out.print(" You got " + score + " out of 3");
+    
 }
 %>
 <html>
-    <head><title>Quiz App</title></head>
+    <head><title>Quiz App</title>
+    <style>
+
+
+*{
+    font-family:Verdana;
+    font-color:rgb(67, 67, 67);
+}
+
+
+#wrapper{
+
+    background-color:rgb(151, 214, 241);
+}
+
+button{
+    margin-top:15px;
+    height:40px;
+    width:100px;
+    border:0;
+    border-radius:8px;
+    background-color:rgb(0, 179, 105);
+    box-shadow:0 0 5px rgb(0,0,0);
+    font-face:Verdana;
+    font-size:15px;
+}
+
+h2{
+    font-size:20px;
+    color:rgb(14, 126, 66);
+}
+
+h3{
+    font-size:18px;
+    color:rgb(137, 111, 6);
+}
+    </style>
+    
+    
+    
+    </head>
     <body>
+    <div id="wrapper">
         <h1>My Quiz App</h1>
+        <h2>You got <%=score %> out of 3</h2>
         <table border="0">
-            <tr><th><h2><%= questions[numb] %></h2></th></tr>
+            <tr><th><h3><%= questions[numb] %></h3></th></tr>
             <form>
                 <tr><td><input type="radio" name="ans" value="<%=Answers[numb][0] %>" /><%=Answers[numb][0] %></td></tr>
                 <tr><td><input type="radio" name="ans" value="<%=Answers[numb][1] %>" /><%=Answers[numb][1] %></td></tr>
                 <tr><td><input type="radio" name="ans" value="<%=Answers[numb][2] %>" /><%=Answers[numb][2] %></td></tr>
                 <tr><td><input type="radio" name="ans" value="<%=Answers[numb][3] %>" /><%=Answers[numb][3] %></td></tr>
                 <input type="hidden" name="num" value=<%= ++numb %> />
-                <tr><td><input type="submit" name="Next" /></td></tr>
+                <tr><td><button>NEXT</button></td></tr>
             </form>
         </table>
-
+    </div>
     </body>
 </html>
