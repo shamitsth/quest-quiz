@@ -5,10 +5,14 @@ if(session.getAttribute("user")==null)
     return;
 }
 
+int totalQuest=3; //Total number of questions
+
 String[] questions=new String[3];
 questions[0]="What is the capital of Japan?";
 questions[1]="Who is the current President of Nepal?";
 questions[2]="In which continent Turkey lies?";
+
+
 
 String[] correctAns=new String[3];
 correctAns[0]="Tokyo";
@@ -34,17 +38,37 @@ Answers[2][3]="Africa";
 String num=request.getParameter("num");
 String ans=request.getParameter("ans");
 int numb=0;
+int score;
+score=Integer.parseInt(session.getAttribute("score").toString());
+
+
 if(num==null)
     numb=0;
 else
     numb=Integer.parseInt(num);
+
+
+//Check if questions are finished
+if(numb==totalQuest)
+{
+    response.sendRedirect("result.jsp");
+    return;
+}
+
+
+
 if(ans!=null)
 {
 
     if(ans.equals(correctAns[numb-1]))
     {
         out.print("Correct!!");
+        score++;
+        session.setAttribute("score",score);
+        
     }
+
+    out.print(" You got " + score + " out of 3");
 }
 %>
 <html>
@@ -54,10 +78,10 @@ if(ans!=null)
         <table border="0">
             <tr><th><h2><%= questions[numb] %></h2></th></tr>
             <form>
-                <tr><td><input type="radio" name="ans" value=<%=Answers[numb][0] %> /><%=Answers[numb][0] %></td></tr>
-                <tr><td><input type="radio" name="ans" value=<%=Answers[numb][1] %> /><%=Answers[numb][1] %></td></tr>
-                <tr><td><input type="radio" name="ans" value=<%=Answers[numb][2] %> /><%=Answers[numb][2] %></td></tr>
-                <tr><td><input type="radio" name="ans" value=<%=Answers[numb][3] %> /><%=Answers[numb][3] %></td></tr>
+                <tr><td><input type="radio" name="ans" value="<%=Answers[numb][0] %>" /><%=Answers[numb][0] %></td></tr>
+                <tr><td><input type="radio" name="ans" value="<%=Answers[numb][1] %>" /><%=Answers[numb][1] %></td></tr>
+                <tr><td><input type="radio" name="ans" value="<%=Answers[numb][2] %>" /><%=Answers[numb][2] %></td></tr>
+                <tr><td><input type="radio" name="ans" value="<%=Answers[numb][3] %>" /><%=Answers[numb][3] %></td></tr>
                 <input type="hidden" name="num" value=<%= ++numb %> />
                 <tr><td><input type="submit" name="Next" /></td></tr>
             </form>
